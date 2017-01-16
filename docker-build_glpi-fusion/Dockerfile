@@ -14,6 +14,11 @@ RUN apt-get update \
 	&& echo "Extraction finished" \
 	&& rm -rf /var/lib/apt/lists/* glpi-${GLPI_VERSION}.tar.gz
 
+COPY config_db.php ${GLPI_HOME}/config/config_db.php
+
+COPY cron_glpi_jobs /tmp/cron/cron_glpi_jobs
+
+
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -28,30 +33,52 @@ RUN apt-get update \
 		php5-mysql \
 		wget \
 	&& php5enmod imap \
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* \
+	&& mkdir -pv /tmp/cron
 
 
 COPY 000-default.conf /etc/apache2/sites-available
 
 
-ENV FUSIONINV_VERSION 9.1_1.0
 
-COPY cron_fusioninventory_jobs /tmp
+ENV FUSIONINV_PLUGIN_VERSION 9.1_1.0
 
 RUN wget --no-check-certificate --progress=bar:force https://github.com/fusioninventory/fusioninventory-for-glpi/releases/download/glpi9.1%2B1.0/fusioninventory-for-glpi_9.1.1.0.tar.gz \
 	&& tar -C ${GLPI_HOME}/plugins -xvzf fusioninventory-for-glpi_9.1.1.0.tar.gz \
-	&& rm -f fusioninventory-for-glpi_9.1.1.0.tar.gz \
-	&& cat /tmp/cron_fusioninventory_jobs | crontab - \
-	&& rm /tmp/cron_fusioninventory_jobs
+	&& rm -f fusioninventory-for-glpi_9.1.1.0.tar.gz
 
 
-COPY config_db.php ${GLPI_HOME}/config/config_db.php
+
+ENV ENVIRONMENT_PLUGIN_VERSION 2.0.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/environment/releases/download/${ENVIRONMENT_PLUGIN_VERSION}/glpi-environment-${ENVIRONMENT_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-environment-${ENVIRONMENT_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-environment-${ENVIRONMENT_PLUGIN_VERSION}.tar.gz
+
+
+
+ENV ACCOUNTS_PLUGIN_VERSION 2.2.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/accounts/releases/download/${ACCOUNTS_PLUGIN_VERSION}/glpi-accounts-${ACCOUNTS_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-accounts-${ACCOUNTS_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-accounts-${ACCOUNTS_PLUGIN_VERSION}.tar.gz
+
+
+
+ENV DATABASES_PLUGIN_VERSION 1.9.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/databases/releases/download/${DATABASES_PLUGIN_VERSION}/glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz
+
 
 
 RUN useradd -G www-data -d ${GLPI_HOME} glpi \
 	&& chown -R www-data:www-data ${GLPI_HOME}
 
-
+RUN cat /tmp/cron/* | crontab - \
+	&& rm -rf /tmp/cron
+	
 ENV ENTRYPOINT_FILE /usr/local/sbin/entrypoint.sh
 COPY entrypoint.sh ${ENTRYPOINT_FILE}
 RUN chmod 554 ${ENTRYPOINT_FILE} \
