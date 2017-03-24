@@ -1,4 +1,4 @@
-FROM debian:8.6
+FROM debian:8.7
 
 
 ENV GLPI_VERSION 9.1.1
@@ -97,11 +97,19 @@ RUN wget --no-check-certificate --progress=bar:force https://forge.glpi-project.
 
 
 
-ENV DASHBOARD_PLUGIN_VERSION 0.8.2
+#ENV DASHBOARD_PLUGIN_VERSION 0.8.2
+#
+#RUN wget --no-check-certificate --progress=bar:force https://forge.glpi-project.org/attachments/download/2179/GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz \
+#	&& tar -C ${GLPI_HOME}/plugins -xvzf GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz \
+#	&& rm -f GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz
 
-RUN wget --no-check-certificate --progress=bar:force https://forge.glpi-project.org/attachments/download/2179/GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz \
-	&& tar -C ${GLPI_HOME}/plugins -xvzf GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz \
-	&& rm -f GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz
+
+
+ENV MYDASHBOARD_PLUGIN_VERSION 1.3.2
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/mydashboard/releases/download/${MYDASHBOARD_PLUGIN_VERSION}/glpi-mydashboard-${MYDASHBOARD_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-mydashboard-${MYDASHBOARD_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-mydashboard-${MYDASHBOARD_PLUGIN_VERSION}.tar.gz
 
 
 
