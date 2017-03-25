@@ -49,43 +49,11 @@ RUN wget --no-check-certificate --progress=bar:force https://github.com/fusionin
 
 
 
-#ENV ENVIRONMENT_PLUGIN_VERSION 2.0.0
-#
-#RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/environment/releases/download/${ENVIRONMENT_PLUGIN_VERSION}/glpi-environment-${ENVIRONMENT_PLUGIN_VERSION}.tar.gz \
-#	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-environment-${ENVIRONMENT_PLUGIN_VERSION}.tar.gz \
-#	&& rm -f glpi-environment-${ENVIRONMENT_PLUGIN_VERSION}.tar.gz
-
-
-
 ENV ACCOUNTS_PLUGIN_VERSION 2.2.0
 
 RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/accounts/releases/download/${ACCOUNTS_PLUGIN_VERSION}/glpi-accounts-${ACCOUNTS_PLUGIN_VERSION}.tar.gz \
 	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-accounts-${ACCOUNTS_PLUGIN_VERSION}.tar.gz \
 	&& rm -f glpi-accounts-${ACCOUNTS_PLUGIN_VERSION}.tar.gz
-
-
-
-ENV DATABASES_PLUGIN_VERSION 1.9.0
-
-RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/databases/releases/download/${DATABASES_PLUGIN_VERSION}/glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz \
-	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz \
-	&& rm -f glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz
-
-
-
-ENV WEBAPPLICATIONS_PLUGIN_VERSION 2.3.0
-
-RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/webapplications/releases/download/${WEBAPPLICATIONS_PLUGIN_VERSION}/glpi-webapplications-${WEBAPPLICATIONS_PLUGIN_VERSION}.tar.gz \
-	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-webapplications-${WEBAPPLICATIONS_PLUGIN_VERSION}.tar.gz \
-	&& rm -f glpi-webapplications-${WEBAPPLICATIONS_PLUGIN_VERSION}.tar.gz
-
-
-
-ENV POSITIONS_PLUGIN_VERSION 4.3.0
-
-RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/positions/releases/download/${POSITIONS_PLUGIN_VERSION}/glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz \
-	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz \
-	&& rm -f glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz
 
 
 
@@ -97,11 +65,27 @@ RUN wget --no-check-certificate --progress=bar:force https://forge.glpi-project.
 
 
 
-#ENV DASHBOARD_PLUGIN_VERSION 0.8.2
-#
-#RUN wget --no-check-certificate --progress=bar:force https://forge.glpi-project.org/attachments/download/2179/GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz \
-#	&& tar -C ${GLPI_HOME}/plugins -xvzf GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz \
-#	&& rm -f GLPI-dashboard_plugin-${DASHBOARD_PLUGIN_VERSION}.tar.gz
+ENV CERTIFICATES_PLUGIN_VERSION 2.2.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/certificates/releases/download/${CERTIFICATES_PLUGIN_VERSION}/glpi-certificates-${CERTIFICATES_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-certificates-${CERTIFICATES_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-certificates-${CERTIFICATES_PLUGIN_VERSION}.tar.gz
+
+
+
+ENV DATABASES_PLUGIN_VERSION 1.9.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/databases/releases/download/${DATABASES_PLUGIN_VERSION}/glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-databases-${DATABASES_PLUGIN_VERSION}.tar.gz
+
+
+
+ENV DOMAINS_PLUGIN_VERSION 1.8.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/domains/releases/download/${DOMAINS_PLUGIN_VERSION}/glpi-domains-${DOMAINS_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-domains-${DOMAINS_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-domains-${DOMAINS_PLUGIN_VERSION}.tar.gz
 
 
 
@@ -110,6 +94,22 @@ ENV MYDASHBOARD_PLUGIN_VERSION 1.3.2
 RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/mydashboard/releases/download/${MYDASHBOARD_PLUGIN_VERSION}/glpi-mydashboard-${MYDASHBOARD_PLUGIN_VERSION}.tar.gz \
 	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-mydashboard-${MYDASHBOARD_PLUGIN_VERSION}.tar.gz \
 	&& rm -f glpi-mydashboard-${MYDASHBOARD_PLUGIN_VERSION}.tar.gz
+
+
+
+ENV POSITIONS_PLUGIN_VERSION 4.3.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/positions/releases/download/${POSITIONS_PLUGIN_VERSION}/glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz
+
+
+
+ENV WEBAPPLICATIONS_PLUGIN_VERSION 2.3.0
+
+RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/webapplications/releases/download/${WEBAPPLICATIONS_PLUGIN_VERSION}/glpi-webapplications-${WEBAPPLICATIONS_PLUGIN_VERSION}.tar.gz \
+	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-webapplications-${WEBAPPLICATIONS_PLUGIN_VERSION}.tar.gz \
+	&& rm -f glpi-webapplications-${WEBAPPLICATIONS_PLUGIN_VERSION}.tar.gz
 
 
 
