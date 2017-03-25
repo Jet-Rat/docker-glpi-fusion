@@ -97,7 +97,7 @@ RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelG
 
 
 
-ENV POSITIONS_PLUGIN_VERSION 4.3.0
+ENV POSITIONS_PLUGIN_VERSION 4.3.1
 
 RUN wget --no-check-certificate --progress=bar:force https://github.com/InfotelGLPI/positions/releases/download/${POSITIONS_PLUGIN_VERSION}/glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz \
 	&& tar -C ${GLPI_HOME}/plugins -xvzf glpi-positions-${POSITIONS_PLUGIN_VERSION}.tar.gz \
